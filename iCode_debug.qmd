@@ -1,0 +1,74 @@
+---
+title: "Debugging"
+title-slide-attributes:
+  data-background-image: fig/iCode_logo_simple.png
+  data-background-size: contain
+  data-background-opacity: "0.2"
+format: 
+  revealjs:
+    theme: default
+editor: visual
+author: Guillaume Patoine
+logo: fig/iCode_logo_simple.png
+footer: "iCode Seminar Series"
+toc: true
+toc-title: Contents
+preview-links: true
+---
+
+## 1. When it breaks
+
+![](fig/bug_meme.jpg){height=300  fig-align="right"}
+
+### Finding error
+
+When you encounter an error
+
+
+Finding your bug is a process of confirming the many things that you believe are true — until you find one which is not true.
+
+—Norm Matloff
+
+###
+
+traceback()
+rlang::last_trace()
+
+
+
+Exercise 1: Debug the following function
+
+
+
+## 2. Advanced tools
+
+### Dive into the function
+
+### Interactive debugger interface (browser mode)
+
+- browser()
+- breakpoints
+- recover
+- debug()
+
+### Debugging interface
+
+![](fig/debug_interface.png){fig-align="center"}
+
+###
+
+
+
+
+## 3. Sources and references
+
+- Advanced R book: Debugging <br>
+<https://adv-r.hadley.nz/debugging.html>
+- Jenny Brian talk <br>
+<https://www.youtube.com/watch?v=vgYS-F8opgE)>
+
+![](fig/closure_talk.PNG){width="380" fig-align="center"}
+
+##
+
+![](fig/closure_summary_slide.PNG){height="380" fig-align="left"}
