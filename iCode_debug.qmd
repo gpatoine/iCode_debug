@@ -16,59 +16,121 @@ toc-title: Contents
 preview-links: true
 ---
 
-## 1. When it breaks
+## When it breaks
 
-![](fig/bug_meme.jpg){height=300  fig-align="right"}
 
-### Finding error
+![](fig/bug_meme.jpg){height=450} 
+![](fig/debug_docu_meme.jpeg){height=450}
+
+
+
+
+
+
+
+# 1.Manual debugging
+
+## Finding the error(s)
 
 When you encounter an error
 
-
+::: {.alert .alert-info style="text-align: center; max-width: 800; margin: auto; border: 3px solid black; padding: 10px;"}
 Finding your bug is a process of confirming the many things that you believe are true — until you find one which is not true.
 
 —Norm Matloff
-
-###
-
-traceback()
-rlang::last_trace()
+:::
 
 
+## Accessing source code 
 
-Exercise 1: Debug the following function
+- F1 for documentation
+- print (no comment)
+- F2 (no comment)
+- check source code (Github/CRAN)
 
 
+## View traceback
 
-## 2. Advanced tools
+![](fig/callstack.png){height=300  fig-align="center"}
 
-### Dive into the function
+- traceback()
+- rlang::last_trace()
 
-### Interactive debugger interface (browser mode)
 
-- browser()
-- breakpoints
-- recover
-- debug()
+## View traceback {.unnumbered .unlisted}
 
-### Debugging interface
+```{r, echo=TRUE, error=TRUE}
+f <- function(a) g(a)
+g <- function(b) h(b)
+h <- function(c) i(c)
+i <- function(d) {
+  if (!is.numeric(d)) {
+    stop("`d` must be numeric", call. = FALSE)
+  }
+  d + 10
+}
+
+f("a")
+
+```
+
+```
+> traceback()
+5: stop("`d` must be numeric", call. = FALSE) at #3
+4: i(c) at #1
+3: h(b) at #1
+2: g(a) at #1
+1: f("a")
+
+```
+
+
+## Tips and tricks
+
+- Can you reproduce it?
+- Simplify the problem, make a reprex
+
+**Run the function line by line in the global environment**
+
+- Input argument values
+- Add `print()` calls
+- Check expected results along way
+
+
+# 2. Advanced tools to dive/dig into the function
+
+## Interactive debugger interface (browser mode)
 
 ![](fig/debug_interface.png){fig-align="center"}
 
-###
+## Exercise 1: How to use debugger
+
+- interactive "Rerun with debug"
+- `browser()`: in code, when run
+- breakpoints: in IDE, when line reached
+- recover: set in options, starts at time of error
+- `debug()`: run with function name as arguments
+
+Exercise 1: (https://github.com/gpatoine/iCode_debug/sample_script.R)
 
 
+## Exercise 2: Error of your choice
+
+Pick a function to look into, or try to resolve an error that you had.
+
+Examples: `sample()`, `lm()`, `ggplot`, `gptools::coldesc()`
+
+Look into how the functions are built, you can relate to the function writing guidelines from the function iCode series. Are checks performed.
+
+Break the functions and see how errors are handled?
 
 
-## 3. Sources and references
+# Sources and references
 
-- Advanced R book: Debugging <br>
+- Advanced R book: Debugging chapter <br>
 <https://adv-r.hadley.nz/debugging.html>
 - Jenny Brian talk <br>
 <https://www.youtube.com/watch?v=vgYS-F8opgE)>
 
-![](fig/closure_talk.PNG){width="380" fig-align="center"}
-
-##
-
-![](fig/closure_summary_slide.PNG){height="380" fig-align="left"}
+![](fig/closure_talk.PNG){height="280"}
+![](fig/closure_summary_slide.PNG){height="280"}
